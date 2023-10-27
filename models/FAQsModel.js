@@ -9,12 +9,12 @@ question :{
 },
 
 answer:{
-    type:true,
+    type:String,
     required:[true, "Please add answer of the above question"],
     unique:true
 }
 
-})
+},{ timestamps: true })
 
 const FAQsModel = model("FAQs", FAQsSchema);
 

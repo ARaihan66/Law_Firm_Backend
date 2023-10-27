@@ -1,17 +1,19 @@
 require("dotenv").config();
-const express = require("express");
-const app = express();
-
-const port = process.env.PORT || 8001;
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+const app = require("./app");
+const mongoose = require('mongoose');
 
 
+//Database Connection
+mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then((data) => {
+    console.log("Database is connected successfully!!!")
+}).catch((error) => {
+    console.log("Database connection is failed!!!")
+})
 
-
-
-
-app.listen(port , ()=>{
-    console.log(`The server is running on the port number ${port}`)
+// Create Sever
+app.listen(process.env.PORT, () => {
+    console.log(`Server is successfully running on port ${process.env.PORT}`)
 })
