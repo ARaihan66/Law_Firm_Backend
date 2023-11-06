@@ -22,7 +22,7 @@ const PracticeArea = require("./routes/PracticeAreaRouter")
 const Advocate = require("./routes/AdvocateRouter")
 const Contact = require("./routes/ContactRouter")
 
-app.get("/", (req,res)=>{
+app.get("/test", (req,res)=>{
   res.status.json({
     message:"Testing On Vercel"
   })
