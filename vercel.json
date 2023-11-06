@@ -1,6 +1,10 @@
 {
-    "rewrites": [
-      { "source": "/api/(.*)", "destination": "/api/$1" }
+    "version": 2,
+    "name": "law-firm",
+    "builds": [
+       { "src": "index.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "src": "/(.*)", "dest": "/app.js" }
     ]
-  }
-  
+ }
