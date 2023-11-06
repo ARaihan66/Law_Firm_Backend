@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const {addFAQs,updateFAQ,deleteFAQs} = require('../controllers/FAQsController')
+const {addFAQs,getAllFAQ,updateFAQ,deleteFAQs} = require('../controllers/FAQsController')
 
 
 router.route("/add")
-      .get(addFAQs)
+      .post(addFAQs)
+router.route("/get")
+      .get(getAllFAQ)
 router.route("/update")
       .put(updateFAQ)
 router.route("/delete")

@@ -23,4 +23,21 @@ const createComment = async (req, res) => {
   });
 };
 
-module.exports = { createComment };
+// Get all comment
+const getAllComment = async(req,res)=>{
+const getData = await clientComentModel.find();
+
+if(!getData){
+  res.status(200).json({
+    message:"failed",
+    data:"No one comments yet"
+  })
+}
+
+res.status(200).json({
+  message:"successful",
+  data:getData
+})
+}
+
+module.exports = { createComment,getAllComment };

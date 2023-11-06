@@ -9,16 +9,22 @@ const advocateSchema = Schema({
 
     experience:{
         type: String,
-        required: [true, "Please provide experience name"]
+        required: [true, "Please provide experience"]
     },
 
     designation:{
         type: String,
-        required: [true, "Please provide designation name"]
+        required: [true, "Please provide designation"]
     },
 
-    phoneNumber:{
-        type:String
+    description:{
+        type:String,
+        required:[true, "Please provide description"]
+    },
+
+    imageUrl:{
+        type:String,
+        require:true
     }
 })
 

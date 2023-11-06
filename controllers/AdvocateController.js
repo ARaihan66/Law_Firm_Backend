@@ -1,24 +1,50 @@
-const advocateModel = require("../models/AddAdvocateModel");
+const advocateModel = require("../models/AdvocateModel");
 
 //Add advocate
 const addAdvocate = async (req, res) => {
   try {
-    const { name, experience, designation, phoneNumber } = req.body;
+    const imageUrl = req.file.filename;
+    const { name, experience, designation, description } = req.body;
 
     const advocate = await advocateModel.create({
       name,
       experience,
       designation,
-      phoneNumber,
+      description,
+      imageUrl,
     });
 
     res.status(200).json({
       message: "Successfully advocate created!!!",
-      data: advocate,
+       data: advocate
     });
   } catch (error) {
     res.status(402).json({
       message: error.message,
+    });
+  }
+};
+
+//Get advocate info
+const getAdvocateInfo = async (req, res) => {
+  try {
+    const getData = await advocateModel.find();
+
+    if (!getData) {
+      res.status(401).json({
+        message: "failed",
+        data: "No one comments yet",
+      });
+    }
+
+    res.status(200).json({
+      message: "successful",
+      data: getData,
+    });
+  } catch (error) {
+    res.status(200).json({
+      message: "successful",
+      data: error.message,
     });
   }
 };
@@ -69,4 +95,4 @@ const deleteAdvocate = async (req, res) => {
   }
 };
 
-module.exports = { addAdvocate, updateAdvocate };
+module.exports = { addAdvocate, getAdvocateInfo, updateAdvocate };

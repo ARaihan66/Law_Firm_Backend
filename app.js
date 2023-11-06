@@ -6,6 +6,7 @@ const port = process.env.PORT || 8001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('upload'))
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -17,9 +18,16 @@ app.use(cors(corsOptions));
 const FAQ = require("./routes/FAQRoute");
 const Case = require("./routes/CaseRouter");
 const Comment = require("./routes/ClientCommentRouter");
+const PracticeArea = require("./routes/PracticeAreaRouter")
+const Advocate = require("./routes/AdvocateRouter")
+const Contact = require("./routes/ContactRouter")
 
 app.use("/api/faq", FAQ);
 app.use("/api/case", Case);
 app.use("/api/comment", Comment);
+app.use("/api/practice", PracticeArea);
+app.use("/api/advocate", Advocate)
+app.use("/api/contact", Contact)
+
 
 module.exports = app;

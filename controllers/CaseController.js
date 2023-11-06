@@ -24,6 +24,22 @@ const addCaseHistory = async(req,res)=>{
     }
 }
 
+// Get case history
+const getCaseHistory = async(req,res)=>{   
+    try {
+        const getData = await caseModel.find();
+        res.status(200).json({
+            message:'successful',
+            data : getData
+        })
+    } catch (error) {
+        res.status(401).json({
+            message:'failed',
+            data : error.message
+        })
+    }
+}
+
 // Update case history
 const updateCase = async(req,res)=>{
 
@@ -52,4 +68,4 @@ const updateCase = async(req,res)=>{
 
 }
 
-module.exports = {addCaseHistory,updateCase}
+module.exports = {addCaseHistory,getCaseHistory,updateCase}
