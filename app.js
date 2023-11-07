@@ -22,6 +22,11 @@ const PracticeArea = require("./routes/PracticeAreaRouter")
 const Advocate = require("./routes/AdvocateRouter")
 const Contact = require("./routes/ContactRouter")
 
+app.get("/", (req,res)=>{
+  res.json({
+    message:"Deploy express server on vercel"
+  })
+})
 
 app.use("/api/faq", FAQ);
 app.use("/api/case", Case);
