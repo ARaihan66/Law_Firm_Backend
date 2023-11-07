@@ -84,11 +84,12 @@ const updateFAQ = async (req, res) => {
 // Delete FAQs
 const deleteFAQs = async (req, res) => {
   try {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const deletedFAQ = await FAQsModel.findByIdAndDelete(id);
 
     res.status(200).json({
       message: "successful",
+      data:deleteFAQs
     });
   } catch (error) {
     res.status(200).json({

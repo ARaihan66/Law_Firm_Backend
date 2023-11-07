@@ -7,9 +7,9 @@ router.route("/add")
       .post(addFAQs)
 router.route("/get")
       .get(getAllFAQ)
-router.route("/update")
+router.route("/update/:id")
       .put(updateFAQ)
-router.route("/delete")
+router.route("/delete/:id")
       .delete(deleteFAQs)
 
 
