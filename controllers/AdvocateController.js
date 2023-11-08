@@ -15,13 +15,14 @@ const addAdvocate = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Add advocate data.",
       data: advocate,
     });
   } catch (error) {
     res.status(402).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
@@ -33,19 +34,20 @@ const getAdvocateInfo = async (req, res) => {
 
     if (!getData) {
       res.status(401).json({
-        message: "failed",
-        data: "No one comments yet",
+        success:false,
+        message: "No advocate data has added yet.",
       });
     }
 
     res.status(200).json({
-      message: "successful",
+      success:true,
+      message: "Successfully get advocate data.",
       data: getData,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success:false,
+      message: error.message,
     });
   }
 };
@@ -70,13 +72,14 @@ const updateAdvocate = async (res, req) => {
     );
 
     res.status(200).json({
-      message: "Advocate info updated successfully",
+      success:true,
+      message: "Update advocate data.",
       data: updatedAdvocate,
     });
   } catch (error) {
     res.status(402).json({
-      message:"failed",
-      data: error.message,
+      success:false,
+      message: error.message,
     });
   }
 };
@@ -84,15 +87,17 @@ const updateAdvocate = async (res, req) => {
 // Remove advocate
 const deleteAdvocate = async (req, res) => {
   try {
-    const id  = req.params.id;
+    const id = req.params.id;
 
     const deletedAdvocate = await advocateModel.findByIdAndDelete(id);
 
     res.status(200).json({
+      success:true,
       message: "Deleted successfully",
     });
   } catch (error) {
     res.status(200).json({
+      success:false,
       message: error.message,
     });
   }

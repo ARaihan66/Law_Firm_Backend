@@ -13,13 +13,14 @@ const addCaseHistory = async(req,res)=>{
     })
 
     res.status(200).json({
+        success:true,
         message:"Case history added successfully!!!",
         data:caseHistory,
     })
     } catch (error) {
         res.status(402).json({
-            message:"failed",
-            data: error.message
+            success:false,
+            message: error.message
         })  
     }
 }
@@ -29,13 +30,14 @@ const getCaseHistory = async(req,res)=>{
     try {
         const getData = await caseModel.find();
         res.status(200).json({
-            message:'successful',
+            success:true,
+            message:'Get case history data.',
             data : getData
         })
     } catch (error) {
         res.status(401).json({
-            message:'failed',
-            data : error.message
+            success:false,
+            message:error.message
         })
     }
 }
@@ -56,14 +58,15 @@ const updateCase = async(req,res)=>{
         },{new:true})
 
         res.status(200).json({
+            success:true,
             message:"Updated successfully!!!",
             data:updatedCase
         })
 
     } catch (error) {
         res.status(402).json({
-            message:"failed",
-            data: error.message
+            success:false,
+            message: error.message
         })
     }
 
@@ -77,12 +80,13 @@ try {
     const deletedCaseHistory = await caseModel.findByIdAndDelete(id);
 
     res.status(200).json({
-        message:"successfull",
+        success:true,
+        message:"Delete successfully",
     })
 } catch (error) {
     res.status(401).json({
-        message:"failed",
-        data:error.message
+        success:false,
+        message:error.message
     })
 }
 }

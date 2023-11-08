@@ -19,13 +19,14 @@ const createComment = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Add client comment successfully",
       data: clientComment,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
@@ -37,19 +38,20 @@ const getAllComment = async (req, res) => {
 
     if (!getData) {
       res.status(200).json({
-        message: "failed",
-        data: "No one comments yet",
+        success: true,
+        message: "No one comments yet",
       });
     }
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Get all comment successfully",
       data: getData,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
@@ -62,11 +64,13 @@ const deleteComment = async (req, res) => {
     const deletedComment = await clientComentModel.findByIdAndDelete(id);
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Delete successfully",
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
+      success: false,
+      message: error.message,
     });
   }
 };

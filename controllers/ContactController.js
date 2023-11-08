@@ -19,13 +19,14 @@ const addContactData = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "successful",
+      success:true,
+      message: "Contact add successfully",
       data: contactData,
     });
   } catch (error) {
     res.status(401).json({
-      message:"failed",
-      data: error.message
+      success:false,
+      message:error.message
     });
   }
 };
@@ -36,11 +37,13 @@ const getContactData = async (req, res) => {
     const getData = await contactModel.find();
 
     res.status(200).json({
-      message: "successful",
+      success:true,
+      message: "Get all contact data successfully",
       data: getData,
     });
   } catch (error) {
     res.status(401).json({
+      success:false,
       message: error.message,
     });
   }
@@ -54,7 +57,8 @@ const deleteContactData = async(req,res)=>{
     const deletedContact = await contactModel.findByIdAndDelete(id);
 
     res.status(200).json({
-      message:'success',
+      success:true,
+      message:'Delete contact data successfully.',
     })
   } catch (error) {
     res.status(401).json({

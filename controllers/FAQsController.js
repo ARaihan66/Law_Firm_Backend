@@ -1,6 +1,6 @@
 const FAQsModel = require("../models/FAQsModel");
 
-// Create post
+// Create FAQ's
 const addFAQs = async (req, res) => {
   try {
     const { question, answer } = req.body;
@@ -18,42 +18,45 @@ const addFAQs = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Add successfully.",
+      success: true,
+      message: "Add FAQ successfully.",
+      data: FAQ,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
 
 //Get all FAQ
-const getAllFAQ = async (req, res) => {
+const getAllFAQs = async (req, res) => {
   try {
     const getData = await FAQsModel.find();
 
     if (!getData) {
       res.status(401).json({
-        message: "failed",
-        data: "No one comments yet",
+        success: false,
+        message: "No FAQ's added yet.",
       });
     }
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Get all FAQ data successfully.",
       data: getData,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
 
-// Update post
-const updateFAQ = async (req, res) => {
+// Update FAQ's
+const updateFAQs = async (req, res) => {
   try {
     const id = req.params.id;
     const { question, answer } = req.body;
@@ -70,13 +73,14 @@ const updateFAQ = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "successful",
+      success: true,
+      message: "Update FAQ's successfully",
       data: updatedFAQ,
     });
   } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
@@ -88,15 +92,15 @@ const deleteFAQs = async (req, res) => {
     const deletedFAQ = await FAQsModel.findByIdAndDelete(id);
 
     res.status(200).json({
-      message: "successful",
-      data:deleteFAQs
+      success: true,
+      message: "Delete FAQ's successfully.",
     });
   } catch (error) {
     res.status(200).json({
-      message: "falied",
-      data: error.message,
+      success: false,
+      message: error.message,
     });
   }
 };
 
-module.exports = { addFAQs, getAllFAQ, updateFAQ, deleteFAQs };
+module.exports = { addFAQs, getAllFAQs, updateFAQs, deleteFAQs };
