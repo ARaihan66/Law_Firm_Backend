@@ -24,7 +24,8 @@ const addContactData = async (req, res) => {
     });
   } catch (error) {
     res.status(401).json({
-      message: error.message,
+      message:"failed",
+      data: error.message
     });
   }
 };
@@ -45,4 +46,21 @@ const getContactData = async (req, res) => {
   }
 };
 
-module.exports = { addContactData, getContactData };
+// Delete contact
+const deleteContactData = async(req,res)=>{
+  try {
+    const id = req.params.id;
+
+    const deletedContact = await contactModel.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message:'success',
+    })
+  } catch (error) {
+    res.status(401).json({
+      message:'failed',
+    })
+  }
+}
+
+module.exports = { addContactData, getContactData,deleteContactData };

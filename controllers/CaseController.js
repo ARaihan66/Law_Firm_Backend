@@ -4,13 +4,12 @@ const caseModel = require("../models/CaseModel");
 //Add case history
 const addCaseHistory = async(req,res)=>{
     try {
-        const {caseWon,numberOfLawers,freeConsultation,caseDismissed} = req.body;
+        const {achievement,numeric,operator} = req.body;
 
     const caseHistory = await caseModel.create({
-        caseWon,
-        numberOfLawers,
-        freeConsultation,
-        caseDismissed
+        achievement,
+        numeric,
+        operator
     })
 
     res.status(200).json({
@@ -19,7 +18,8 @@ const addCaseHistory = async(req,res)=>{
     })
     } catch (error) {
         res.status(402).json({
-            message: error.message
+            message:"failed",
+            data: error.message
         })  
     }
 }
@@ -44,14 +44,14 @@ const getCaseHistory = async(req,res)=>{
 const updateCase = async(req,res)=>{
 
     try {
-        const {id, caseWon,numberOfLawers,freeConsultation,caseDismissed} = req.body;
+        const id = req.params.id;
+        const { achievement,numeric,operator} = req.body;
 
         const updatedCase = await caseModel.findByIdAndUpdate( id, {
             $set:{
-                caseWon,
-                numberOfLawers,
-                freeConsultation,
-                caseDismissed 
+                achievement,
+                numeric,
+                operator
             }
         },{new:true})
 
@@ -62,10 +62,29 @@ const updateCase = async(req,res)=>{
 
     } catch (error) {
         res.status(402).json({
-            message: error.message
+            message:"failed",
+            data: error.message
         })
     }
 
 }
 
-module.exports = {addCaseHistory,getCaseHistory,updateCase}
+// Delete case history
+const deleteCase = async (req,res)=>{
+try {
+    const id = req.params.id;
+
+    const deletedCaseHistory = await caseModel.findByIdAndDelete(id);
+
+    res.status(200).json({
+        message:"successfull",
+    })
+} catch (error) {
+    res.status(401).json({
+        message:"failed",
+        data:error.message
+    })
+}
+}
+
+module.exports = {addCaseHistory,getCaseHistory,updateCase,deleteCase}

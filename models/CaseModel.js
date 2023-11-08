@@ -1,25 +1,19 @@
 const { Schema, model } = require("mongoose");
 
 const caseSchema = Schema({
-  caseWon: {
+  achievement: {
     type: String,
+    required: true,
+  },
+  numeric: {
+    type: Number,
     required: true,
   },
 
-  numberOfLawers: {
-    type: String,
-    required: true,
-  },
-
-  freeConsultation: {
-    type: String,
-    required: true,
-  },
-
-  caseDismissed: {
-    type: String,
-    required: true,
-  },
+  operator:{
+    type:String,
+    required:true
+  }
 });
 
 const caseModel = model("Case", caseSchema);

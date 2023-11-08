@@ -4,6 +4,6 @@ const { createComment,getAllComment,deleteComment } = require("../controllers/Cl
 
 router.route("/add").post(createComment);
 router.route("/get").get(getAllComment);
-router.route("/delete").delete(deleteComment);
+router.route("/delete/:id").delete(deleteComment);
 
 module.exports = router;

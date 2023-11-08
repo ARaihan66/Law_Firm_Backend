@@ -15,12 +15,13 @@ const addAdvocate = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Successfully advocate created!!!",
-       data: advocate
+      message: "successful",
+      data: advocate,
     });
   } catch (error) {
     res.status(402).json({
-      message: error.message,
+      message: "failed",
+      data: error.message,
     });
   }
 };
@@ -42,8 +43,8 @@ const getAdvocateInfo = async (req, res) => {
       data: getData,
     });
   } catch (error) {
-    res.status(200).json({
-      message: "successful",
+    res.status(401).json({
+      message: "failed",
       data: error.message,
     });
   }
@@ -52,7 +53,8 @@ const getAdvocateInfo = async (req, res) => {
 // Update advocate info
 const updateAdvocate = async (res, req) => {
   try {
-    const { id, name, experience, designation, phoneNumber } = req.body;
+    const id = req.params.id;
+    const { name, experience, designation, phoneNumber } = req.body;
 
     const updatedAdvocate = await advocateModel.findByIdAndUpdate(
       id,
@@ -73,7 +75,8 @@ const updateAdvocate = async (res, req) => {
     });
   } catch (error) {
     res.status(402).json({
-      message: error.message,
+      message:"failed",
+      data: error.message,
     });
   }
 };
@@ -81,7 +84,7 @@ const updateAdvocate = async (res, req) => {
 // Remove advocate
 const deleteAdvocate = async (req, res) => {
   try {
-    const { id } = req.body;
+    const id  = req.params.id;
 
     const deletedAdvocate = await advocateModel.findByIdAndDelete(id);
 
