@@ -34,29 +34,30 @@ const getAdvocateInfo = async (req, res) => {
 
     if (!getData) {
       res.status(401).json({
-        success:false,
+        success: false,
         message: "No advocate data has added yet.",
       });
     }
 
     res.status(200).json({
-      success:true,
+      success: true,
       message: "Successfully get advocate data.",
       data: getData,
     });
   } catch (error) {
     res.status(401).json({
-      success:false,
+      success: false,
       message: error.message,
     });
   }
 };
 
 // Update advocate info
-const updateAdvocate = async (res, req) => {
+const updateAdvocate = async (req, res) => {
   try {
     const id = req.params.id;
-    const { name, experience, designation, phoneNumber } = req.body;
+    const imageUrl = req.file.filename;
+    const { name, experience, designation, description } = req.body;
 
     const updatedAdvocate = await advocateModel.findByIdAndUpdate(
       id,
@@ -65,20 +66,21 @@ const updateAdvocate = async (res, req) => {
           name,
           experience,
           designation,
-          phoneNumber,
+          description,
+          imageUrl,
         },
       },
       { new: true }
     );
 
     res.status(200).json({
-      success:true,
+      success: true,
       message: "Update advocate data.",
       data: updatedAdvocate,
     });
   } catch (error) {
     res.status(402).json({
-      success:false,
+      success: false,
       message: error.message,
     });
   }
@@ -92,15 +94,20 @@ const deleteAdvocate = async (req, res) => {
     const deletedAdvocate = await advocateModel.findByIdAndDelete(id);
 
     res.status(200).json({
-      success:true,
+      success: true,
       message: "Deleted successfully",
     });
   } catch (error) {
     res.status(200).json({
-      success:false,
+      success: false,
       message: error.message,
     });
   }
 };
 
-module.exports = { addAdvocate, getAdvocateInfo, updateAdvocate };
+module.exports = {
+  addAdvocate,
+  getAdvocateInfo,
+  updateAdvocate,
+  deleteAdvocate,
+};

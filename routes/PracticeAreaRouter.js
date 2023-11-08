@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const {addPracticeArea,getPracticeAreaData} = require('../controllers/PracticeAreaController')
+const {addPracticeArea,getPracticeAreaData,updatePracticeAreaData,deletePracticeAreaData} = require('../controllers/PracticeAreaController')
 
 
 router.route("/add")
       .post(addPracticeArea)
 router.route("/get")
       .get(getPracticeAreaData)
-//router.route("/update")
-//      .put(updateFAQ)
-//router.route("/delete")
-//      .delete(deleteFAQs)
+router.route("/update/:id")
+      .put(updatePracticeAreaData)
+router.route("/delete/:id")
+      .delete(deletePracticeAreaData)
 
 
 module.exports = router;

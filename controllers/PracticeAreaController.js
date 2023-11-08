@@ -2,72 +2,110 @@ const practiceAreaModel = require("../models/PracticeAreaModel");
 
 // Create practice area
 const addPracticeArea = async (req, res) => {
-  const { service_type, service_description } = req.body;
+  try {
+    const { service_type, service_description } = req.body;
 
-  if (!service_type || !service_description) {
-    return res.status(400).json({
+    if (!service_type || !service_description) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill up all field.",
+      });
+    }
+
+    const practiceArea = await practiceAreaModel.create({
+      service_type,
+      service_description,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Add practice area successfully.",
+      data: practiceArea,
+    });
+  } catch (error) {
+    res.status(401).json({
       success: false,
-      message: "No service available rightnow",
+      message: error.message,
     });
   }
-
-  const practiceArea = await practiceAreaModel.create({
-    service_type,
-    service_description,
-  });
-
-  res.status(200).json({
-    message: "Add successfully.",
-    data: practiceArea,
-  });
 };
 
 //Get practice area data
 const getPracticeAreaData = async (req, res) => {
-  const getData = await practiceAreaModel.find();
+  try {
+    const getData = await practiceAreaModel.find();
 
-  if (!getData) {
+    if (!getData) {
+      res.status(401).json({
+        message: "failed",
+        data: "No practice area data has added successfully.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Get practice area data successfully",
+      data: getData,
+    });
+  } catch (error) {
     res.status(401).json({
-      message: "failed",
-      data: "No one comments yet",
+      success: false,
+      message: error.message,
     });
   }
-
-  res.status(200).json({
-    message: "successful",
-    data: getData,
-  });
 };
 
-// Update post
-const updateFAQ = async (req, res) => {
-  const { id, question, answer } = req.body;
+// Update practice area data
+const updatePracticeAreaData = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { service_type, service_description } = req.body;
 
-  const updatedFAQ = await FAQsModel.findByIdAndUpdate(
-    id,
-    {
-      $set: {
-        question: question,
-        answer: answer,
+    const updatedFAQ = await practiceAreaModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          service_type: service_type,
+          service_description: service_description,
+        },
       },
-    },
-    { new: true }
-  );
+      { new: true }
+    );
 
-  res.status(200).json({
-    message: "Successfully updated!!!",
-    data: updatedFAQ,
-  });
+    res.status(200).json({
+      success: true,
+      message: "Successfully practice area data updated!!!",
+      data: updatedFAQ,
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
-// Delete FAQs
-const deleteFAQs = async (req, res) => {
-  const { id } = req.body;
-  const deletedFAQ = await FAQsModel.findByIdAndDelete(id);
+// Delete practice area data
+const deletePracticeAreaData = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedFAQ = await practiceAreaModel.findByIdAndDelete(id);
 
-  res.status(200).json({
-    message: "Successfully deleted!!!",
-  });
+    res.status(200).json({
+      success: true,
+      message: "Successfully deleted!!!",
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
-module.exports = { addPracticeArea, getPracticeAreaData };
+module.exports = {
+  addPracticeArea,
+  getPracticeAreaData,
+  updatePracticeAreaData,
+  deletePracticeAreaData,
+};
