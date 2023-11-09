@@ -21,6 +21,7 @@ const Comment = require("./routes/ClientCommentRouter");
 const PracticeArea = require("./routes/PracticeAreaRouter")
 const Advocate = require("./routes/AdvocateRouter")
 const Contact = require("./routes/ContactRouter")
+const Admin = require("./routes/AdminRouter");
 
 app.get("/", (req,res)=>{
   res.json({
@@ -28,6 +29,7 @@ app.get("/", (req,res)=>{
   })
 })
 
+app.use("/api/admin", Admin);
 app.use("/api/faq", FAQ);
 app.use("/api/case", Case);
 app.use("/api/comment", Comment);

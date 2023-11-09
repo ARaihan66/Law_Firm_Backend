@@ -4,12 +4,11 @@ const caseModel = require("../models/CaseModel");
 //Add case history
 const addCaseHistory = async(req,res)=>{
     try {
-        const {achievement,numeric,operator} = req.body;
+        const {achievement,numeric} = req.body;
 
     const caseHistory = await caseModel.create({
         achievement,
-        numeric,
-        operator
+        numeric
     })
 
     res.status(200).json({
@@ -47,13 +46,12 @@ const updateCase = async(req,res)=>{
 
     try {
         const id = req.params.id;
-        const { achievement,numeric,operator} = req.body;
+        const { achievement,numeric} = req.body;
 
         const updatedCase = await caseModel.findByIdAndUpdate( id, {
             $set:{
                 achievement,
-                numeric,
-                operator
+                numeric
             }
         },{new:true})
 
