@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const {addFAQs,getAllFAQs,updateFAQs,deleteFAQs} = require('../controllers/FAQsController')
+const verifyAdmin = require("../utils/VerifyAdmin")
 
 
 router.route("/add")
-      .post(addFAQs)
+      .post(verifyAdmin,addFAQs)
 router.route("/get")
-      .get(getAllFAQs)
+      .get(verifyAdmin,getAllFAQs)
 router.route("/update/:id")
-      .put(updateFAQs)
+      .put(verifyAdmin,updateFAQs)
 router.route("/delete/:id")
-      .delete(deleteFAQs)
+      .delete(verifyAdmin,deleteFAQs)
 
 
 module.exports = router;

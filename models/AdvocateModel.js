@@ -26,7 +26,7 @@ const advocateSchema = Schema({
         type:String,
         require:true
     }
-})
+},{ timestamps: true })
 
 const advocateModel = model ("Advocate", advocateSchema)
 

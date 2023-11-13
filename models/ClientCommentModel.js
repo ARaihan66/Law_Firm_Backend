@@ -17,7 +17,7 @@ const clientCommentSchema = Schema({
     type: String,
     required: [true, "Provide your comment"],
   },
-});
+},{ timestamps: true });
 
 const clientComentModel = model("Client_Comment", clientCommentSchema);
 

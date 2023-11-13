@@ -18,7 +18,7 @@ const contactSchema = Schema({
     type: String,
     required: [true, "Please provide message!!!"],
   },
-});
+},{ timestamps: true });
 
 const contactModel = model("contact", contactSchema);
 

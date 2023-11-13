@@ -14,7 +14,7 @@ const caseSchema = Schema({
     type:String,
     required:true
   }
-});
+},{ timestamps: true });
 
 const caseModel = model("Case", caseSchema);
 module.exports = caseModel;

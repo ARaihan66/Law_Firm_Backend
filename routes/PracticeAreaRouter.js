@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const {addPracticeArea,getPracticeAreaData,updatePracticeAreaData,deletePracticeAreaData} = require('../controllers/PracticeAreaController')
+const verifyAdmin = require("../utils/VerifyAdmin")
 
 
 router.route("/add")
-      .post(addPracticeArea)
+      .post(verifyAdmin,addPracticeArea)
 router.route("/get")
-      .get(getPracticeAreaData)
+      .get(verifyAdmin,getPracticeAreaData)
 router.route("/update/:id")
-      .put(updatePracticeAreaData)
+      .put(verifyAdmin,updatePracticeAreaData)
 router.route("/delete/:id")
-      .delete(deletePracticeAreaData)
+      .delete(verifyAdmin,deletePracticeAreaData)
 
 
 module.exports = router;

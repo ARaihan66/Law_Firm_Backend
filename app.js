@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('upload'))
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.BASE_URL,
   methods: "GET,POST,PUT,DELETE",
 };
 
