@@ -73,8 +73,9 @@ const adminSchema = new mongoose.Schema(
       required: [true, "Please provide password."],
     },
 
-    name: {
+    username: {
       type: String,
+      required: [true, "Please provide name!!!"],
     },
 
     about: {

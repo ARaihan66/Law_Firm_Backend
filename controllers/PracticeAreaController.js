@@ -44,7 +44,6 @@ const getPracticeAreaData = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Get practice area data successfully",
       data: getData,
     });
   } catch (error) {

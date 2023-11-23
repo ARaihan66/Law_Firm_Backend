@@ -4,7 +4,7 @@ const FAQsModel = require("../models/FAQsModel");
 const addFAQs = async (req, res) => {
   try {
     const { question, answer } = req.body;
-
+    
     if (!question || !answer) {
       return res.status(400).json({
         success: false,

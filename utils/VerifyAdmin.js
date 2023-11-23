@@ -3,7 +3,9 @@ const jwt = require("jsonwebtoken");
 // Middleware to verify the admin's JWT token from the cookie
 const verifyAdmin = (req, res, next) => {
   // Retrieve the JWT token from the cookie
-  const token = req.cookies.token;
+  const token = req.cookies.JWT;
+
+  console.log(token);
 
   // Check if the token is missing
   if (!token) {
@@ -32,6 +34,7 @@ const verifyAdmin = (req, res, next) => {
     } else {
       // If the token is valid, store the decoded user ID in the request object
       req.id = decoded._id;
+      console.log(req.id);
       // Proceed to the next middleware or route handler
       next();
     }

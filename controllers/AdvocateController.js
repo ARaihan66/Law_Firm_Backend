@@ -41,7 +41,6 @@ const getAdvocateInfo = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully get advocate data.",
       data: getData,
     });
   } catch (error) {
@@ -56,20 +55,30 @@ const getAdvocateInfo = async (req, res) => {
 const updateAdvocate = async (req, res) => {
   try {
     const id = req.params.id;
-    const imageUrl = req.file.filename;
+    let imageUrl;
+
+    // Check if a new file is provided in the request
+    if (req.file) {
+      imageUrl = req.file.filename;
+    }
+
     const { name, experience, designation, description } = req.body;
+
+    const updateFields = {
+      name,
+      experience,
+      designation,
+      description,
+    };
+
+    // Add imageUrl to updateFields if it exists
+    if (imageUrl) {
+      updateFields.imageUrl = imageUrl;
+    }
 
     const updatedAdvocate = await advocateModel.findByIdAndUpdate(
       id,
-      {
-        $set: {
-          name,
-          experience,
-          designation,
-          description,
-          imageUrl,
-        },
-      },
+      { $set: updateFields },
       { new: true }
     );
 
