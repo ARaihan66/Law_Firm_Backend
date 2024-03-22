@@ -304,7 +304,7 @@ const adminForgotPassword = async (req, res) => {
     await token.save();
 
     // Create verification URL
-    const url = `${process.env.BASE_URL}/admin/${admin._id}/reset/${token.token}`;
+    const url = `${process.env.BASE_URL_ADMIN}/admin/${admin._id}/reset/${token.token}`;
 
     // Send email data
     try {
@@ -419,6 +419,132 @@ const adminLogOut = async (req, res) => {
   }
 };
 
+//Get admin info
+const getAdminInfo = async (req, res) => {
+  try {
+    const getData = await adminModel.find();
+
+    if (!getData) {
+      res.status(401).json({
+        success: false,
+        message: "No advocate data has added yet.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: getData,
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// Add admin info
+const addAdmin = async (req, res) => {
+  try {
+    const id = req.id;
+    let imageUrl;
+
+    //console.log("ID:-------", id);
+
+    // Check if a new file is provided in the request
+    if (req.file) {
+      imageUrl = req.file.filename;
+    }
+
+    console.log("File:-----", req.file);
+
+    const { instituteName, about } = req.body;
+
+    console.log(req.body);
+
+    const updateFields = {
+      instituteName,
+      about,
+    };
+
+    //console.log("Institute: ", instituteName);
+    //console.log("About ", about);
+
+    // Add imageUrl to updateFields if it exists
+    if (imageUrl) {
+      updateFields.imageUrl = imageUrl;
+    }
+
+    console.log("Image Url:---", imageUrl);
+
+    const updatedAdmin = await adminModel.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true }
+    );
+
+    const existAdmin = await adminModel.findOne();
+    //console.log("Admin Info:", existAdmin);
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully added data",
+      data: existAdmin,
+    });
+  } catch (error) {
+    res.status(402).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// Update admin info
+const updateAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let imageUrl;
+
+    // Check if a new file is provided in the request
+    if (req.file) {
+      imageUrl = req.file.filename;
+    }
+
+    console.log("File:---", req.file);
+
+    const { instituteName, about } = req.body;
+
+    const updateFields = {
+      instituteName,
+      about,
+    };
+
+    // Add imageUrl to updateFields if it exists
+    if (imageUrl) {
+      updateFields.imageUrl = imageUrl;
+    }
+
+    console.log(updateFields);
+
+    const updatedAdvocate = await adminModel.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Updated admin data",
+      data: updatedAdvocate,
+    });
+  } catch (error) {
+    res.status(402).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   adminRegister,
   adminEmailVerify,
@@ -427,4 +553,7 @@ module.exports = {
   adminForgotPassword,
   adminResetPassword,
   adminLogOut,
+  getAdminInfo,
+  addAdmin,
+  updateAdmin,
 };

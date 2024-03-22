@@ -11,9 +11,17 @@ const addCaseHistory = async(req,res)=>{
         numeric
     })
 
+
+    if(!achievement || !numeric){
+        res.status(400).json({
+            success:false,
+            message:"Please fill up all the given field",
+        })
+    }
+
     res.status(200).json({
         success:true,
-        message:"Case history added successfully!!!",
+        message:"Case history has added successfully!!!",
         data:caseHistory,
     })
     } catch (error) {
@@ -30,7 +38,6 @@ const getCaseHistory = async(req,res)=>{
         const getData = await caseModel.find();
         res.status(200).json({
             success:true,
-            message:'Get case history data.',
             data : getData
         })
     } catch (error) {
@@ -57,8 +64,7 @@ const updateCase = async(req,res)=>{
 
         res.status(200).json({
             success:true,
-            message:"Updated successfully!!!",
-            data:updatedCase
+            message:"Updated successfully!!!"
         })
 
     } catch (error) {

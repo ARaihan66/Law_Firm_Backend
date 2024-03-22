@@ -3,7 +3,7 @@ const app = express();
 var cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -11,10 +11,15 @@ app.use(express.static("upload"));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: process.env.BASE_URL,
+  origin: ["http://localhost:3000", "http://localhost:3001"],
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
+
+//const corsOptions1 = {
+//  methods: "GET,POST,PUT,DELETE",
+//  credentials: true,
+//};
 
 app.use(cors(corsOptions));
 
@@ -25,12 +30,6 @@ const PracticeArea = require("./routes/PracticeAreaRouter");
 const Advocate = require("./routes/AdvocateRouter");
 const Contact = require("./routes/ContactRouter");
 const Admin = require("./routes/AdminRouter");
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "Deploy express server on vercel",
-  });
-});
 
 app.use("/api/admin", Admin);
 app.use("/api/faq", FAQ);

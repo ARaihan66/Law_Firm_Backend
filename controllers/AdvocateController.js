@@ -16,7 +16,7 @@ const addAdvocate = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Add advocate data.",
+      message: "Add advocate successfully",
       data: advocate,
     });
   } catch (error) {

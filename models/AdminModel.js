@@ -80,6 +80,12 @@ const adminSchema = new mongoose.Schema(
 
     about: {
       type: String,
+      default: " ",
+    },
+
+    instituteName: {
+      type: String,
+      default: " ",
     },
 
     imageUrl: {

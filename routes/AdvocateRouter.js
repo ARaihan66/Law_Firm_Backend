@@ -6,7 +6,7 @@ const {
   addAdvocate,
   getAdvocateInfo,
   updateAdvocate,
-  deleteAdvocate
+  deleteAdvocate,
 } = require("../controllers/AdvocateController");
 const verifyAdmin = require("../utils/VerifyAdmin");
 
@@ -23,9 +23,10 @@ const storage = multer.diskStorage({
 // Multer upload
 const upload = multer({ storage: storage });
 
-router.route("/add").post(verifyAdmin,upload.single("imageUrl"), addAdvocate);
-router.route("/get").get(verifyAdmin,getAdvocateInfo);
-router.route("/update/:id").put(verifyAdmin,upload.single("image"),updateAdvocate);
-router.route("/delete/:id").delete(verifyAdmin,deleteAdvocate);
+router.route("/add").post(verifyAdmin, upload.single("imageUrl"), addAdvocate);
+router.route("/get").get(verifyAdmin, getAdvocateInfo);
+router.route("/client/get").get(getAdvocateInfo);
+router.route("/update/:id").put(verifyAdmin, upload.single("imageUrl"), updateAdvocate);
+router.route("/delete/:id").delete(verifyAdmin, deleteAdvocate);
 
 module.exports = router;
