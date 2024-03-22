@@ -16,7 +16,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  return "Hello world";
+  res.send("Hello world");
 });
 
 // Create Sever
