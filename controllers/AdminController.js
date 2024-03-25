@@ -48,7 +48,7 @@ const adminRegister = async (req, res) => {
     await token.save();
 
     // Create verification url
-    const url = `${process.env.BASE_URL}/adminId/${admin._id}/verify/${token.token}`;
+    const url = `https://law-firm-backend-sigma.vercel.app/adminId/${admin._id}/verify/${token.token}`;
 
     // Send email data
     await SendEmail(admin.email, "Verify Email", url);
