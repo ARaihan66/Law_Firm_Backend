@@ -18,8 +18,12 @@ app.use(cookieParser());
 
 //app.use(cors(corsOptions));
 
+const corsOptions = {
+  origin: 'https://law-firm-admin-omega.vercel.app',
+  credentials: true
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 const FAQ = require("./routes/FAQRoute");
 const Case = require("./routes/CaseRouter");
