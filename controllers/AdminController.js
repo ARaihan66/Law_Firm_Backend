@@ -182,6 +182,8 @@ const adminLogin = async (req, res) => {
         .cookie("JWT", jwtToken, {
           expires: new Date(Date.now() + 2000 * 24 * 60 * 60 * 1000),
           httpOnly: true,
+          secure: true, 
+          sameSite: 'None'
         })
         .json({
           success: true,
