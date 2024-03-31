@@ -48,7 +48,7 @@ const adminRegister = async (req, res) => {
     await token.save();
 
     // Create verification url
-    const url = `https://law-firm-admin-omega.vercel.app/admin/${admin._id}/verify/${token.token}`;
+    const url = `http://localhost:3000/admin/${admin._id}/verify/${token.token}`;
 
     // Send email data
     await SendEmail(admin.email, "Verify Email", url);
@@ -304,7 +304,7 @@ const adminForgotPassword = async (req, res) => {
     await token.save();
 
     // Create verification URL
-    const url = `${process.env.BASE_URL_ADMIN}/admin/${admin._id}/reset/${token.token}`;
+    const url = `http://localhost:3000/admin/${admin._id}/reset/${token.token}`;
 
     // Send email data
     try {
