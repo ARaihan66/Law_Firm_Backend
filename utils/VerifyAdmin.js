@@ -5,7 +5,7 @@ const verifyAdmin = async (req, res, next) => {
   // Retrieve the JWT token from the cookie
   const token = req.cookies.JWT;
 
-  //console.log(token);
+  console.log(token);
 
   // Check if the token is missing
   if (!token) {
