@@ -11,10 +11,7 @@ app.use(express.static("upload"));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: [
-    "https://law-firm-admin-omega.vercel.app",
-    "https://law-client-taupe.vercel.app",
-  ],
+  origin: ["https://law-firm-admin-omega.vercel.app", "http://localhost:3000"],
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
