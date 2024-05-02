@@ -56,6 +56,29 @@ const getAllComment = async (req, res) => {
   }
 };
 
+//active client comment
+const activeClientComment = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const activeComment = findByIdAndUpdate(id, {
+      $set: {
+        status: true,
+      },
+      new: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully status updated.",
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 //Delete client comment
 const deleteComment = async (req, res) => {
   try {
@@ -75,4 +98,9 @@ const deleteComment = async (req, res) => {
   }
 };
 
-module.exports = { createComment, getAllComment, deleteComment };
+module.exports = {
+  createComment,
+  getAllComment,
+  activeClientComment,
+  deleteComment,
+};

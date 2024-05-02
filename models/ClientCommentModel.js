@@ -18,6 +18,10 @@ const clientCommentSchema = Schema(
       type: String,
       required: [true, "Provide your comment"],
     },
+    status: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
