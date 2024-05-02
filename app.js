@@ -32,6 +32,7 @@ const PracticeArea = require("./routes/PracticeAreaRouter");
 const Advocate = require("./routes/AdvocateRouter");
 const Contact = require("./routes/ContactRouter");
 const Admin = require("./routes/AdminRouter");
+const Request = require("./routes/RequestRouter");
 
 app.use("/api/admin", Admin);
 app.use("/api/faq", FAQ);
@@ -40,5 +41,6 @@ app.use("/api/comment", Comment);
 app.use("/api/practice", PracticeArea);
 app.use("/api/advocate", Advocate);
 app.use("/api/contact", Contact);
+app.use("/api/request", Request)
 
 module.exports = app;
