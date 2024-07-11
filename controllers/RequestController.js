@@ -14,6 +14,8 @@ const addRequest = async (req, res) => {
       requestMessage,
     } = req.body;
 
+    console.log("Do not worry i am working....")
+
     const storeRequest = await requestModel.create({
       name,
       phoneNo,
@@ -41,6 +43,8 @@ const addRequest = async (req, res) => {
 const getRequest = async(req,res)=>{
 try {
     const getRequest =  await requestModel.find();
+
+    console.log("Data", getRequest);
     
     res.status(200).json({
         success:true,
@@ -56,7 +60,7 @@ try {
 }
 
 //delete request
-const deleteRequest = async(req,res){
+const deleteRequest = async(req,res)=>{
     try {
         const id = req.params.id;
 
@@ -76,4 +80,4 @@ const deleteRequest = async(req,res){
     }
 }
 
-module.exports = {addRequest,getRequest, deleteRequest};
+module.exports = {addRequest, getRequest, deleteRequest};

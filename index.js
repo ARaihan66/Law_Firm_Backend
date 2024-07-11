@@ -16,7 +16,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("Welcome to MUSTAFIZUR RAHMAN & ASSOCIATES");
 });
 
 // Create Sever

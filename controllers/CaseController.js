@@ -64,7 +64,8 @@ const updateCase = async(req,res)=>{
 
         res.status(200).json({
             success:true,
-            message:"Updated successfully!!!"
+            message:"Updated successfully!!!",
+            data : updatedCase
         })
 
     } catch (error) {

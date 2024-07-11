@@ -8,7 +8,7 @@ const {
 } = require("../controllers/RequestController");
 
 router.route("/add").post(addRequest);
-router.route("/get").post(getRequest);
-router.route("/delete/:id").post(deleteRequest);
+router.route("/get").get(getRequest);
+router.route("/delete/:id").delete(deleteRequest);
 
 module.exports = router;

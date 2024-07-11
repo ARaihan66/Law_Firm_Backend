@@ -11,19 +11,12 @@ app.use(express.static("upload"));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://law-firm-admin-omega.vercel.app"],
+  origin: ["http://rasmul.com", "http://admin.rasmul.com"],
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
 
 app.use(cors(corsOptions));
-
-//const corsOptions = {
-//  origin: 'http://localhost:3000',
-// credentials: true
-//};
-
-//app.use(cors(corsOptions));
 
 const FAQ = require("./routes/FAQRoute");
 const Case = require("./routes/CaseRouter");
@@ -41,6 +34,6 @@ app.use("/api/comment", Comment);
 app.use("/api/practice", PracticeArea);
 app.use("/api/advocate", Advocate);
 app.use("/api/contact", Contact);
-app.use("/api/request", Request)
+app.use("/api/request", Request);
 
 module.exports = app;

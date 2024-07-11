@@ -35,9 +35,9 @@ router.route("/login").post(adminLogin);
 router.route("/password-change").post(verifyAdmin, changePassword);
 router.route("/password-forgot").post(adminForgotPassword);
 router.route("/:id/reset/:token").post(adminResetPassword);
-router.route("/log-out").get(verifyAdmin, adminLogOut);
+router.route("/log-out").get( adminLogOut);
 router.route("/get").get(verifyAdmin, getAdminInfo);
-router.route("/client/get").get( getAdminInfo);
+router.route("/client/get").get(getAdminInfo);
 
 router.route("/add").put(verifyAdmin,upload.single("imageUrl"), addAdmin);
 router.route("/update/:id").put(verifyAdmin,upload.single("imageUrl"),updateAdmin);

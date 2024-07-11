@@ -142,12 +142,12 @@ const adminLogin = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Please fill up all given field",
+        message: "Please fill up all given fields",
       });
     }
 
     // Find the admin by email
-    const admin = await adminModel.findOne({ email: email });
+    const admin = await adminModel.findOne({ email });
 
     if (!admin) {
       return res.status(401).json({
@@ -156,53 +156,51 @@ const adminLogin = async (req, res) => {
       });
     }
 
-    if (admin.verify !== false) {
-      // Compare the provided password with the hashed password from the database
-      const passwordMatch = await bcrypt.compare(
-        password.trim(),
-        admin.password
-      );
-
-      if (!passwordMatch) {
-        return res.status(401).json({
-          success: false,
-          message: "Email or Password is Incorrect",
-        });
-      }
-
-      // Create JWT token
-      const jwtToken = await jwt.sign(
-        { id: admin._id },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: "1d" }
-      );
-
-      res
-        .status(200)
-        .cookie("JWT", jwtToken, {
-          expires: new Date(Date.now() + 2000 * 24 * 60 * 60 * 1000),
-          httpOnly: true,
-          secure: true, 
-          sameSite: 'None'
-        })
-        .json({
-          success: true,
-          message: "Login successful.",
-        });
-    } else {
-      return res.status(200).json({
+    // Check if the admin is verified
+    if (admin.verify === false) {
+      return res.status(401).json({
         success: false,
-        message: "Please Verify your mail first.",
+        message: "Please verify your mail first.",
       });
     }
+
+    // Compare the provided password with the hashed password from the database
+    const passwordMatch = await bcrypt.compare(password.trim(), admin.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Email or Password is incorrect",
+      });
+    }
+
+    // Create JWT token
+    const jwtToken = jwt.sign(
+      { id: admin._id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "1d" }
+    );
+
+    res
+      .status(200)
+      .cookie("JWT", jwtToken, {
+        expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // 1 day
+        httpOnly: true,
+        secure: true,
+        //sameSite: 'None',
+      })
+      .json({
+        success: true,
+        message: "Login successful.",
+      });
+
   } catch (error) {
     res.status(500).json({
       success: false,
       message: error.message,
     });
   }
-};
-
+}
 // Password change controller
 const changePassword = async (req, res) => {
   try {

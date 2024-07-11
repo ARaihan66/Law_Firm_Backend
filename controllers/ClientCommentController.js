@@ -5,6 +5,8 @@ const createComment = async (req, res) => {
   try {
     const { name, phone, email, comment } = req.body;
 
+    console.log(name, phone, email, comment)
+
     if (!name || !phone || !email || !comment) {
       return res.status(400).json({
         success: false,

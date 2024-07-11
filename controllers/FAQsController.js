@@ -1,14 +1,16 @@
 const FAQsModel = require("../models/FAQsModel");
 
-// Create FAQ's
+// Create FAQ
 const addFAQs = async (req, res) => {
   try {
     const { question, answer } = req.body;
     
+    console.log(question, answer)
+
     if (!question || !answer) {
       return res.status(400).json({
         success: false,
-        message: "Please fill all the field",
+        message: "Please fill all the fields",
       });
     }
 
@@ -23,22 +25,22 @@ const addFAQs = async (req, res) => {
       data: FAQ,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-//Get all FAQ
+// Get all FAQs
 const getAllFAQs = async (req, res) => {
   try {
     const getData = await FAQsModel.find();
 
-    if (!getData) {
-      res.status(401).json({
+    if (!getData || getData.length === 0) {
+      return res.status(404).json({
         success: false,
-        message: "No FAQ's added yet.",
+        message: "No FAQs added yet.",
       });
     }
 
@@ -48,55 +50,76 @@ const getAllFAQs = async (req, res) => {
       data: getData,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-// Update FAQ's
+// Update FAQ
 const updateFAQs = async (req, res) => {
   try {
     const id = req.params.id;
     const { question, answer } = req.body;
 
+    if (!question || !answer) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all the fields",
+      });
+    }
+
     const updatedFAQ = await FAQsModel.findByIdAndUpdate(
       id,
       {
         $set: {
-          question: question,
-          answer: answer,
+          question,
+          answer,
         },
       },
       { new: true }
     );
 
+    if (!updatedFAQ) {
+      return res.status(404).json({
+        success: false,
+        message: "FAQ not found.",
+      });
+    }
+
     res.status(200).json({
       success: true,
-      message: "Update FAQ's successfully",
+      message: "Update FAQ successfully",
       data: updatedFAQ,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-// Delete FAQs
+// Delete FAQ
 const deleteFAQs = async (req, res) => {
   try {
     const id = req.params.id;
     const deletedFAQ = await FAQsModel.findByIdAndDelete(id);
 
+    if (!deletedFAQ) {
+      return res.status(404).json({
+        success: false,
+        message: "FAQ not found.",
+      });
+    }
+
     res.status(200).json({
       success: true,
-      message: "Delete FAQ's successfully.",
+      message: "Delete FAQ successfully.",
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });

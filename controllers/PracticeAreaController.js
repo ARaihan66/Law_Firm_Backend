@@ -5,6 +5,8 @@ const addPracticeArea = async (req, res) => {
   try {
     const { service_type, service_description } = req.body;
 
+    console.log(service_type, service_description)
+
     if (!service_type || !service_description) {
       return res.status(400).json({
         success: false,
