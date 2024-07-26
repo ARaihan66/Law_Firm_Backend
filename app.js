@@ -11,7 +11,7 @@ app.use(express.static("upload"));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://admin.rasmul.com"],
+  origin: ["http://localhost:3000", "http://localhost:3000"],
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
