@@ -5,15 +5,15 @@ const verifyAdmin = require("../utils/VerifyAdmin")
 
 
 router.route("/add")
-      .post(verifyAdmin,addFAQs)
+      .post(addFAQs)
 router.route("/get")
-      .get(verifyAdmin,getAllFAQs)
+      .get(getAllFAQs)
 router.route("/client/get")
       .get(getAllFAQs)  
 router.route("/update/:id")
-      .put(verifyAdmin,updateFAQs)
+      .put(updateFAQs)
 router.route("/delete/:id")
-      .delete(verifyAdmin,deleteFAQs)
+      .delete(deleteFAQs)
 
 
 module.exports = router;

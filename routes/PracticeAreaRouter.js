@@ -8,13 +8,13 @@ const {
 } = require("../controllers/PracticeAreaController");
 const verifyAdmin = require("../utils/VerifyAdmin");
 
-router.route("/add").post(verifyAdmin, addPracticeArea);
+router.route("/add").post( addPracticeArea);
 router
   .route("/get")
-  //.get(verifyAdmin,getPracticeAreaData)
+  //.get(getPracticeAreaData)
   .get(getPracticeAreaData);
 router.route("/client/get").get(getPracticeAreaData);
-router.route("/update/:id").put(verifyAdmin, updatePracticeAreaData);
-router.route("/delete/:id").delete(verifyAdmin, deletePracticeAreaData);
+router.route("/update/:id").put( updatePracticeAreaData);
+router.route("/delete/:id").delete( deletePracticeAreaData);
 
 module.exports = router;

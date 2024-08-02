@@ -187,7 +187,7 @@ const adminLogin = async (req, res) => {
         expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // 1 day
         httpOnly: true,
         secure: true,
-        //sameSite: 'None',
+        sameSite: 'None',
       })
       .json({
         success: true,

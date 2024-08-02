@@ -9,8 +9,8 @@ const verifyAdmin = require("../utils/VerifyAdmin")
 
 
 router.route("/add").post(addContactData);
-router.route("/get").get(verifyAdmin,getContactData);
+router.route("/get").get(getContactData);
 router.route("/client/get").get(getContactData);
-router.route("/delete/:id").delete(verifyAdmin,deleteContactData);
+router.route("/delete/:id").delete(deleteContactData);
 
 module.exports = router;

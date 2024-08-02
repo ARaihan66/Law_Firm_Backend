@@ -32,14 +32,14 @@ const upload = multer({ storage: storage });
 router.route("/register").post(adminRegister);
 router.route("/:id/verify/:token").get(adminEmailVerify);
 router.route("/login").post(adminLogin);
-router.route("/password-change").post(verifyAdmin, changePassword);
+router.route("/password-change").post( changePassword);
 router.route("/password-forgot").post(adminForgotPassword);
 router.route("/:id/reset/:token").post(adminResetPassword);
 router.route("/log-out").get( adminLogOut);
-router.route("/get").get(verifyAdmin, getAdminInfo);
+router.route("/get").get( getAdminInfo);
 router.route("/client/get").get(getAdminInfo);
 
-router.route("/add").put(verifyAdmin,upload.single("imageUrl"), addAdmin);
-router.route("/update/:id").put(verifyAdmin,upload.single("imageUrl"),updateAdmin);
+router.route("/add").put(upload.single("imageUrl"), addAdmin);
+router.route("/update/:id").put(upload.single("imageUrl"),updateAdmin);
 
 module.exports = router;

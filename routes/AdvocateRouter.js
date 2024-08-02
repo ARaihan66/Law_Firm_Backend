@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 // Multer upload
 const upload = multer({ storage: storage });
 
-router.route("/add").post(verifyAdmin, upload.single("imageUrl"), addAdvocate);
-router.route("/get").get(verifyAdmin, getAdvocateInfo);
+router.route("/add").post( upload.single("imageUrl"), addAdvocate);
+router.route("/get").get( getAdvocateInfo);
 router.route("/client/get").get(getAdvocateInfo);
-router.route("/update/:id").put(verifyAdmin, upload.single("imageUrl"), updateAdvocate);
-router.route("/delete/:id").delete(verifyAdmin, deleteAdvocate);
+router.route("/update/:id").put( upload.single("imageUrl"), updateAdvocate);
+router.route("/delete/:id").delete( deleteAdvocate);
 
 module.exports = router;
